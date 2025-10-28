@@ -1,27 +1,58 @@
 <form [formGroup]="MonthlyPremiumForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>Name:</label>
-    <input type="text" id="name" formControlName="name" />
-  </div>
-   <div>
-    <label>Age Next Birthday:</label>
-    <input type="number" id="age_NextBday" formControlName="age_NextBday" />
-  </div>
-   <div>
-    <label>Date of Birth</label>
-    <input type="date" id="MemberDob" formControlName="MemberDob" />
-  </div>
-   <div>
-    <label>Usual Occupation</label>
-    <select id="UsualOccupation" class="form-control" (change)="OnOccupationChange($event)">
-        <option value="" disabled>--Select Occupation--</option>
-            <option *ngFor="let occupation of occupations" [value]="occupation.rating">
-                     {{occupation.name}}
-            </option> 
-    </select>
-  </div>
-  <div>
-    <label>Sum Insured:</label>
-    <input type="number" id="sumInsured" formControlName="sumInsured" />
-  </div>
+
+    <table>
+        <tbody>
+            <tr>
+                <td><label>Name</label></td>
+                <td> <input type="text" id="name" formControlName="name" /></td>
+            </tr>
+            <tr>
+                <td>
+                 <label>Age Next Birthday</label>
+                </td>
+                <td>
+                <input type="number" id="age_NextBday" formControlName="age_NextBday" />
+                </td>
+            </tr>
+            <tr>
+                <td><label>Date of Birth</label>
+
+                </td>
+                <td>
+                    <input type="date" id="MemberDob" formControlName="MemberDob" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Usual Occupation</label>
+                </td>
+                <td>
+                    <select id="UsualOccupation" class="form-control" formControlName="slectedValue"  (change)="OnOccupationChange($event)">
+                            <option value="" disabled>--Select Occupation--</option>
+                                <option *ngFor="let occupation of occupations" [value]="occupation.rating">
+                                        {{occupation.name}}
+                                </option> 
+                        </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label>Sum Insured</label>
+                </td>
+                <td><input type="number" id="sumInsured" formControlName="sumInsured" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Calculate Monthly Premium" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Monthly Premium: {{montlyPremium}}</label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  
+    
 </form>

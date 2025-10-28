@@ -19,4 +19,16 @@ export interface Occupation{
     name:string;
     rating:OccupationRating;
     factor:RatingFactor;
+    // age:number;
+    // memberDob:Date;
+    // sumInsured:number;
+}
+
+export interface OccupationValues{
+    name:string;   
+    age:number;
+    memberDob:Date;
+    //rating:OccupationRating;
+    rating:number;
+    sumInsured:number;
 }

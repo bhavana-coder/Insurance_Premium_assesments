@@ -1,0 +1,6 @@
+@calculate_Premium_HostAddress = http://localhost:5041
+
+GET {{calculate_Premium_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

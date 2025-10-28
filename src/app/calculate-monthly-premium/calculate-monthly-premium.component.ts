@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,ReactiveFormsModule, Validators } from '@angular/forms';
+import { Form, FormBuilder,FormGroup,ReactiveFormsModule, Validators } from '@angular/forms';
 import { OccupationRating,Occupation,RatingFactor } from '../models/occupation';
 import { CommonModule } from '@angular/common';
+import { CalculateServiceService } from '../Service/calculate-service.service';
+import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-calculate-monthly-premium',
   imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './calculate-monthly-premium.component.html',
-  styleUrl: './calculate-monthly-premium.component.css'
+  styleUrl: './calculate-monthly-premium.component.css',
+ 
 })
 export class CalculateMonthlyPremiumComponent implements OnInit {
-  constructor(private fb:FormBuilder) {
-    this.MonthlyPremiumForm=this.fb.group({
-      name:['',Validators.required],
-      age_NextBday:['',Validators.required],
-      MemberDob:['',Validators.required],
-      occupation:['',Validators.required],
-      sumInsured:['',Validators.required]
-    })
+  MonthlyPremiumForm!:FormGroup
+  montlyPremium:number=0;
+  selectedValue:string='';
+  constructor(private fb:FormBuilder,private calculateService:CalculateServiceService) {
+    
    }
    occupations:Occupation[]=[
     {name:"Cleaner",rating:OccupationRating.Cleaner,factor:RatingFactor[OccupationRating.Cleaner]},
@@ -30,14 +30,36 @@ export class CalculateMonthlyPremiumComponent implements OnInit {
    
   ];
 ngOnInit(): void {
-  throw new Error('Method not implemented.');
+  this.MonthlyPremiumForm=this.fb.group({
+      name:['',Validators.required],
+      age_NextBday:['',Validators.required],
+      MemberDob:['',Validators.required],
+      occupation:['',Validators.required],
+      sumInsured:['',Validators.required,Validators.min(0)]  ,
+      slectedValue:['',Validators.required]    
+    })
 }
 onSubmit(){
-  console.log(this.MonthlyPremiumForm.value);
-}
+this.GetmonthlyPremium();
+};
+GetmonthlyPremium(){
+  const selectedValues=
+  {
+    name:this.MonthlyPremiumForm.get("name")?.value,
+    age:this.MonthlyPremiumForm.get("age_NextBday")?.value,
+    memberDob:this.MonthlyPremiumForm.get("MemberDob")?.value,
+    rating:Number(RatingFactor[this.MonthlyPremiumForm.get("slectedValue")?.value]),
+    sumInsured:this.MonthlyPremiumForm.get("sumInsured")?.value    
+  }
+    this.calculateService.calculateMontlyPremium(selectedValues).subscribe(data=>{
+    this.montlyPremium=data;
+  });
+//
+};
+  
 OnOccupationChange(event:any){
-  console.log(event.target.value);
+ this.GetmonthlyPremium();
 }
-MonthlyPremiumForm: any;
+
 
 }

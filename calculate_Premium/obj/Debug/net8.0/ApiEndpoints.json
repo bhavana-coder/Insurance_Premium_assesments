@@ -1,0 +1,48 @@
+[
+  {
+    "ContainingType": "calculate_Premium.Controllers.Premium_calculationController",
+    "Method": "Get",
+    "RelativePath": "Premium_calculation/GetPremium",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "age",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "rating",
+        "Type": "System.Double",
+        "IsRequired": false
+      },
+      {
+        "Name": "sumInsured",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "calculate_Premium.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[calculate_Premium.WeatherForecast, calculate_Premium, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

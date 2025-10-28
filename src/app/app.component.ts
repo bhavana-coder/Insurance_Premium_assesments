@@ -6,7 +6,7 @@ import { CalculateMonthlyPremiumComponent } from "./calculate-monthly-premium/ca
   selector: 'app-root',
   imports: [ CalculateMonthlyPremiumComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css'  
 })
 export class AppComponent {
   title = 'Insurance_Premium';

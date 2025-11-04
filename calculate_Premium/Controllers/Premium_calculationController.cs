@@ -19,7 +19,7 @@ namespace calculate_Premium.Controllers
     {
       try
       {
-        double monthlyAmount = (premium.sumInsured * premium.rating * premium.age) / 1000;
+        double monthlyAmount = (premium.sumInsured * premium.rating * premium.age) / 1000*12;
         return Ok(monthlyAmount);
       }
       catch (Exception ex)

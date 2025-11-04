@@ -14,7 +14,7 @@ import { NgModule } from '@angular/core';
 })
 export class CalculateMonthlyPremiumComponent implements OnInit {
   MonthlyPremiumForm!:FormGroup
-  montlyPremium:number=0;
+  monthlyPremium:number=0;
   selectedValue:string='';
   constructor(private fb:FormBuilder,private calculateService:CalculateServiceService) {
     
@@ -33,8 +33,7 @@ ngOnInit(): void {
   this.MonthlyPremiumForm=this.fb.group({
       name:['',Validators.required],
       age_NextBday:['',Validators.required],
-      MemberDob:['',Validators.required],
-      occupation:['',Validators.required],
+      MemberDob:['',Validators.required],     
       sumInsured:['',Validators.required,Validators.min(0)]  ,
       slectedValue:['',Validators.required]    
     })
@@ -48,17 +47,19 @@ GetmonthlyPremium(){
     name:this.MonthlyPremiumForm.get("name")?.value,
     age:this.MonthlyPremiumForm.get("age_NextBday")?.value,
     memberDob:this.MonthlyPremiumForm.get("MemberDob")?.value,
-    rating:Number(RatingFactor[this.MonthlyPremiumForm.get("slectedValue")?.value]),
+    rating:RatingFactor[this.MonthlyPremiumForm.get("slectedValue")?.value as keyof typeof RatingFactor],
     sumInsured:this.MonthlyPremiumForm.get("sumInsured")?.value    
   }
-    this.calculateService.calculateMontlyPremium(selectedValues).subscribe(data=>{
-    this.montlyPremium=data;
+    this.calculateService.calculatemonthlyPremium(selectedValues).subscribe(data=>{
+    this.monthlyPremium=data;
   });
 //
 };
   
 OnOccupationChange(event:any){
- this.GetmonthlyPremium();
+  if (this.MonthlyPremiumForm.valid) {
+    this.GetmonthlyPremium();
+  }
 }
 
 
